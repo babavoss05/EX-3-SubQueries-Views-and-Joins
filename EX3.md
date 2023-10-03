@@ -69,45 +69,63 @@ INSERT INTO DEPT (DEPTNO, DNAME, LOC) VALUES (40, 'OPERATIONS', 'BOSTON');
 
 
 ### QUERY:
-
+SELECT ename FROM EMP WHERE sal > (SELECT sal FROM EMP WHERE empno = 7566);
 
 ### OUTPUT:
+![image](https://github.com/dineshgl/EX-3-SubQueries-Views-and-Joins/assets/103019882/464dcc33-1480-4b40-8303-28ff7fbaf73d)
+
 
 ### Q2) List the ename,job,sal of the employee who get minimum salary in the company.
 
 ### QUERY:
+SELECT ename,job,sal FROM EMP WHERE sal = (SELECT MIN(sal) FROM EMP);
 
 
 ### OUTPUT:
+![image](https://github.com/dineshgl/EX-3-SubQueries-Views-and-Joins/assets/103019882/df7c0cf2-98da-405b-82d6-02ee36ce6c54)
+
 
 ### Q3) List ename, job of the employees who work in deptno 10 and his/her job is any one of the job in the department ‘SALES’.
 
 ### QUERY:
+SELECT ename,job FROM EMP WHERE deptno = 10 AND job IN (SELECT job FROM EMP WHERE job = 'sales');
 
 
 ### OUTPUT:
+![image](https://github.com/dineshgl/EX-3-SubQueries-Views-and-Joins/assets/103019882/b90db16d-2ec6-418c-b917-867d120fb400)
+
 
 
 ### Q4) Create a view empv5 (for the table emp) that contains empno, ename, job of the employees who work in dept 10.
 
 ### QUERY:
-
+create view empv5 as select EMPNO,ENAME,JOB from EMP where DEPTNO=10;
+SELECT * FROM empv5;
 
 ### OUTPUT:
+![image](https://github.com/dineshgl/EX-3-SubQueries-Views-and-Joins/assets/103019882/9b33f114-473d-46c1-a3bf-85ccb49dac16)
 
 ### Q5) Create a view with column aliases empv30 that contains empno, ename, sal of the employees who work in dept 30. Also display the contents of the view.
 
 ### QUERY:
+create view empv30 AS select EMPNO,ENAME,SAL from EMP where DEPTNO=30;
+SELECT * FROM empv30;
 
 
 ### OUTPUT:
+![image](https://github.com/dineshgl/EX-3-SubQueries-Views-and-Joins/assets/103019882/145eb015-683b-410b-a6ce-087c9bfae56d)
+
 
 ### Q6) Update the view empv5 by increasing 10% salary of the employees who work as ‘CLERK’. Also confirm the modifications in emp table
 
 ### QUERY:
+UPDATE EMP SET sal = sal * 1.1 WHERE job = 'CLERK';
+create view empv5 as select EMPNO,ENAME,SALARY,JOB from EMP;
 
 
 ### OUTPUT:
+![image](https://github.com/dineshgl/EX-3-SubQueries-Views-and-Joins/assets/103019882/4bf93d49-3407-4cea-a2bd-65cb036b20d6)
+
 
 ## Create a Customer1 Table
 ```sql
@@ -140,28 +158,50 @@ INSERT INTO Salesman1 (salesman_id, name, city, commission) VALUES(5003, 'Lauson
 ### Q7) Write a SQL query to find the salesperson and customer who reside in the same city. Return Salesman, cust_name and city.
 
 ### QUERY:
+select s.name,c.cust_name,s.city from salesman1 s ,customer1 c where s.city=c.city;
 
 
 ### OUTPUT:
+![image](https://github.com/dineshgl/EX-3-SubQueries-Views-and-Joins/assets/103019882/1d664ee3-bd33-4c5c-bea3-338b6dc2a572)
+
 
 ### Q8) Write a SQL query to find salespeople who received commissions of more than 13 percent from the company. Return Customer Name, customer city, Salesman, commission.
 
 
 ### QUERY:
-
+select s.name,c.cust_name,c.city,s.commission from salesman1 s inner join customer1 c on s.city=c.city where s.commission>0.13;
 
 ### OUTPUT:
+![image](https://github.com/dineshgl/EX-3-SubQueries-Views-and-Joins/assets/103019882/898fbf9e-f9dd-4fce-b7ab-592bd1712db2)
+
 
 ### Q9) Perform Natural join on both tables
 
 ### QUERY:
+ select * from salesman1 s natural join customer1 c;
 
 
 ### OUTPUT:
+![image](https://github.com/dineshgl/EX-3-SubQueries-Views-and-Joins/assets/103019882/a274dd67-bb03-4b69-afef-41a1203a4873)
+
 
 ### Q10) Perform Left and right join on both tables
 
 ### QUERY:
+select s.name,c.cust_name,c.city,s.commission from salesman1 s left join customer1 c on s.salesman_id=c.salesman_id;
+
+select s.name,c.cust_name,c.city,s.commission from salesman1 s right join customer1 c on s.salesman_id=c.salesman_id;
 
 
 ### OUTPUT:
+### LEFT JOIN:
+![image](https://github.com/dineshgl/EX-3-SubQueries-Views-and-Joins/assets/103019882/4b869caa-55ab-4411-97a2-17d80f80dadf)
+### RIGHT JOIN:
+ ![image](https://github.com/dineshgl/EX-3-SubQueries-Views-and-Joins/assets/103019882/efefe8de-fa32-471e-9c36-5ed023a56906)
+### RESULT:
+ A database is created and implementation of views,subqueries and joins is executed successfully.
+
+
+
+
+
